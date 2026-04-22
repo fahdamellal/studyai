@@ -1,5 +1,6 @@
 import os
 import json
+import fitz
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -96,6 +97,33 @@ def analyze():
             "error": "Erreur serveur",
             "details": str(e)
         }), 500
+
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    if "file" not in request.files:
+        return jsonify({"error": "Aucun fichier"}), 400
+
+    file = request.files["file"]
+    filename = (file.filename or "").lower()
+    text = ""
+
+    if filename.endswith(".txt"):
+        text = file.read().decode("utf-8", errors="ignore")
+
+    elif filename.endswith(".pdf"):
+        pdf_bytes = file.read()
+        doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+        for page in doc:
+            text += page.get_text()
+        doc.close()
+
+    else:
+        return jsonify({"error": "Format non supporté. Utilise .txt ou .pdf"}), 400
+
+    if not text.strip():
+        return jsonify({"error": "Impossible d'extraire le texte"}), 400
+
+    return jsonify({"text": text[:5000]}), 200
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

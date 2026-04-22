@@ -1,0 +1,233 @@
+Cours sur les graphes
+1. C’est quoi un graphe ?
+
+Un graphe est un objet mathématique qui sert à représenter des relations entre des éléments.
+
+Un graphe est formé de :
+
+sommets : ce sont les points
+arêtes ou arcs : ce sont les liaisons entre les sommets
+
+On note souvent un graphe :
+
+G=(S,A)
+
+où :
+
+S = ensemble des sommets
+A = ensemble des arêtes ou arcs
+Exemple simple
+
+Si on a les sommets :
+
+S={A,B,C,D}
+
+et les liaisons :
+
+A={AB,AC,BD}
+
+alors cela veut dire :
+
+A est relié à B
+A est relié à C
+B est relié à D
+2. Différence entre graphe orienté et non orienté
+a) Graphe non orienté
+
+Dans un graphe non orienté, la liaison n’a pas de sens.
+
+Si A est relié à B, alors B est aussi relié à A.
+
+On écrit :
+
+{A,B}
+
+Exemple : une relation d’amitié.
+
+b) Graphe orienté
+
+Dans un graphe orienté, la liaison a un sens.
+
+Si on va de A vers B, cela ne veut pas forcément dire qu’on peut aller de B vers A.
+
+On écrit :
+
+(A,B)
+
+Exemple : une rue à sens unique.
+
+3. Vocabulaire de base
+a) Sommets adjacents
+
+Deux sommets sont adjacents s’ils sont reliés directement par une arête.
+
+Exemple : si A est relié à B, alors A et B sont adjacents.
+
+b) Arêtes adjacentes
+
+Deux arêtes sont adjacentes si elles partagent un même sommet.
+
+c) Ordre d’un graphe
+
+L’ordre d’un graphe = nombre de sommets.
+
+Exemple :
+
+S={A,B,C,D,E}
+
+alors l’ordre du graphe est 5.
+
+d) Taille d’un graphe
+
+La taille d’un graphe = nombre d’arêtes.
+
+4. Degré d’un sommet
+
+Le degré d’un sommet est le nombre d’arêtes qui touchent ce sommet.
+
+On note souvent :
+
+d(x)
+Exemple
+
+Si le sommet A est relié à B, C et D, alors :
+
+d(A)=3
+Dans un graphe orienté
+
+On distingue :
+
+degré entrant : nombre d’arcs qui arrivent au sommet
+degré sortant : nombre d’arcs qui partent du sommet
+
+On note souvent :
+
+d
+−
+(x)=degr
+e
+ˊ
+ entrant
+d
++
+(x)=degr
+e
+ˊ
+ sortant
+5. Chaîne, chemin, cycle, circuit
+
+Ces mots sont très importants.
+
+a) Chaîne
+
+Dans un graphe non orienté, une chaîne est une suite de sommets reliés successivement.
+
+Exemple :
+
+A−B−C−D
+b) Chemin
+
+Dans un graphe orienté, un chemin est une suite de sommets en respectant le sens des arcs.
+
+Exemple :
+
+A→B→C→D
+c) Longueur d’une chaîne ou d’un chemin
+
+La longueur = nombre d’arêtes ou d’arcs utilisés.
+
+Exemple :
+
+A−B−C−D
+
+contient 3 arêtes, donc longueur = 3.
+
+d) Cycle
+
+Un cycle est un chemin fermé : on revient au sommet de départ.
+
+Exemple :
+
+A−B−C−A
+e) Circuit
+
+Dans un graphe orienté, on parle souvent de circuit pour un cycle orienté.
+
+Exemple :
+
+A→B→C→A
+6. Graphe simple, multigraphe, boucle
+a) Graphe simple
+
+Un graphe simple :
+
+ne contient pas de boucle
+ne contient pas plusieurs arêtes entre les mêmes sommets
+b) Boucle
+
+Une boucle est une arête qui relie un sommet à lui-même.
+
+Exemple :
+
+(A,A)
+c) Multigraphe
+
+Un multigraphe peut avoir plusieurs arêtes entre deux mêmes sommets.
+
+7. Graphe complet
+
+Un graphe complet est un graphe où chaque sommet est relié à tous les autres sommets.
+
+On le note souvent :
+
+K
+n
+	​
+
+
+où n est le nombre de sommets.
+
+Exemple
+K
+3
+	​
+
+ : triangle
+K
+4
+	​
+
+ : 4 sommets tous reliés entre eux
+
+Dans K
+n
+	​
+
+, chaque sommet a pour degré :
+
+n−1
+
+et le nombre total d’arêtes est :
+
+2
+n(n−1)
+	​
+
+8. Graphe connexe
+
+Un graphe est connexe si on peut aller de n’importe quel sommet à n’importe quel autre sommet.
+
+Sinon, il n’est pas connexe.
+
+Composantes connexes
+
+Si le graphe n’est pas connexe, il se décompose en plusieurs morceaux appelés composantes connexes.
+
+Exemple
+
+Si on a :
+
+composante 1 : A−B−C
+composante 2 : D−E
+
+alors le graphe a 2 composantes connexes.
