@@ -1,0 +1,53 @@
+# 🚀 Guide Git — Atelier StudyAI (EIC)
+
+### 📥 1. Cloner le projet
+
+# Pour les étudiants CP (classes préparatoires)
+
+git clone -b CP https://github.com/kikjabouza/Atelier_EIC_22_04_2026.git
+
+# Pour les étudiants CI (cycle ingénieur)
+
+git clone -b CI https://github.com/kikjabouza/Atelier_EIC_22_04_2026.git
+
+### 🌿 2. Créer votre branche de travail
+
+# Créer et basculer sur une nouvelle branche
+
+git checkout -b nom-prenom
+
+# Vérifier que vous êtes sur la bonne branche
+
+git branch
+
+### 💾 3. Enregistrer et envoyer les modifications
+
+# Ajouter tous les changements au panier (staging)
+
+git add .
+
+# Enregistrer les modifications avec un message descriptif
+
+git commit -m "feat: ajout fonctionnalité X"
+
+# Envoyer la branche vers le dépôt distant (GitHub)
+
+git push -u origin nom-prenom
+
+### 🔄 4. Récupérer les mises à jour
+
+# Revenir sur la branche commune (CP ou CI)
+
+git checkout CP
+
+# Télécharger les dernières nouveautés
+
+git pull origin CP
+
+# Retourner sur votre branche personnelle
+
+git checkout nom-prenom
+
+# Fusionner les nouveautés dans votre travail
+
+git merge CP
