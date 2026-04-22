@@ -1,0 +1,23 @@
+# Contenu du fichier .gitignore à la racine du projet
+.env
+__pycache__/
+*.pyc
+.DS_Store
+node_modules/
+venv/
+*.log
+
+
+
+
+
+# Dans votre dossier
+rmdir /s /q .git
+git init
+git branch -M main
+echo backend/.env >> .gitignore
+echo .env >> .gitignore
+git add .
+git commit -m "feat: initial commit — StudyAI EIC Atelier"
+git remote add origin https://github.com/USERNAME/studyai.git
+git push -u origin main --force

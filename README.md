@@ -1,3 +1,21 @@
-# Atelier_EIC_22_04_2026
+# 🧠 StudyAI — Transformateur de Cours Intelligent
+Projet réalisé lors de l'atelier EIC — ENSAK Informatic Club
 
-StudyAI est une application web qui transforme un texte en résumé et quiz via IA (Hugging Face). Ce repo est une base pour l’atelier EIC. Cloner selon votre niveau : branche CP (classes préparatoires) ou CI (cycle ingénieur).
+
+## Fonctionnalités
+- Résumé en 3 points clés
+- Quiz QCM interactif avec validation
+
+
+## Installation
+```bash
+cd backend && pip install -r requirements.txt
+# Créer le fichier .env avec HF_TOKEN=hf_...
+python app.py
+```
+
+
+## Équipe
+- Membre 1 (Frontend)
+- Membre 2 (Backend)
+- Membre 3 (Intégration)
