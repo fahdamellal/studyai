@@ -1,0 +1,8 @@
+.env
+backend/.env
+backend/data/studyai.db
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+

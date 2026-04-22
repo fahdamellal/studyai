@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyAI — Smart Revision Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  <div class="page-shell">
+
+    <header class="hero">
+      <div class="hero-left">
+        <div class="logo-mark">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 2L25.2583 8.5V21.5L14 28L2.74167 21.5V8.5L14 2Z" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M14 8L19.1962 11V17L14 20L8.80385 17V11L14 8Z" fill="currentColor" opacity="0.3"/>
+          </svg>
+        </div>
+        <p class="eyebrow">AI Study Assistant</p>
+        <h1>Study<em>AI</em></h1>
+        <p class="hero-text">
+          Upload your course, get a smart summary,<br>answer a quiz, revise faster with flashcards.
+        </p>
+      </div>
+      <div class="hero-right">
+        <div class="hero-badge">
+          <span id="apiStatusDot" class="status-dot"></span>
+          <span id="apiStatusText">Checking backend...</span>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-chip">
+            <span class="stat-value">3×</span>
+            <span class="stat-label">faster revision</span>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-value">AI</span>
+            <span class="stat-label">powered quizzes</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid-layout">
+
+      <!-- Import Card -->
+      <section class="card card-import card-lg">
+        <div class="card-header">
+          <div class="card-icon">01</div>
+          <h2>Import your content</h2>
+        </div>
+        <p class="muted">Paste a lesson or import a PDF/TXT document.</p>
+
+        <div id="dropzone" class="dropzone">
+          <input type="file" id="fileInput" accept=".txt,.pdf" hidden />
+          <div class="dropzone-inner">
+            <div class="drop-icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M28 20v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6M16 4v16M10 10l6-6 6 6"/>
+              </svg>
+            </div>
+            <p class="dropzone-title">Drag & drop your file</p>
+            <p class="muted small">.pdf or .txt — up to 10 MB</p>
+            <button id="browseBtn" class="secondary-btn" type="button">Browse files</button>
+          </div>
+          <div id="fileMeta" class="file-meta hidden"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="difficulty" class="label">Quiz difficulty</label>
+            <select id="difficulty" class="select-input">
+              <option value="easy">🟢 Easy</option>
+              <option value="medium" selected>🟡 Medium</option>
+              <option value="hard">🔴 Hard</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="courseText" class="label">Course text</label>
+        <textarea id="courseText" rows="10" placeholder="Paste your lesson text here..."></textarea>
+
+        <div class="actions-row">
+          <button id="analyzeBtn" type="button" class="primary-btn">
+            <span class="btn-text">Analyze with AI</span>
+            <span class="btn-icon">→</span>
+          </button>
+          <button id="clearBtn" class="ghost-btn" type="button">Clear all</button>
+        </div>
+
+        <div class="progress-block hidden" id="progressBlock">
+          <div class="progress-header">
+            <span id="progressText">Preparing analysis...</span>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress-bar"><span id="progressFill"></span></div>
+        </div>
+      </section>
+
+      <!-- Quality Card -->
+      <section class="card card-quality">
+        <div class="card-header">
+          <div class="card-icon">02</div>
+          <h2>Session quality</h2>
+        </div>
+        <div id="qualityBox" class="quality-box empty-state">
+          <div class="empty-icon">◎</div>
+          <p>Run an analysis to see quality metrics.</p>
+        </div>
+      </section>
+
+      <!-- Summary Card -->
+      <section id="summarySection" class="card card-summary hidden">
+        <div class="card-header">
+          <div class="card-icon">03</div>
+          <h2>Key ideas</h2>
+          <span id="languageBadge" class="badge lang-badge">FR</span>
+        </div>
+        <div id="summaryCards" class="summary-grid"></div>
+      </section>
+
+      <!-- Quiz Card -->
+      <section id="quizSection" class="card card-quiz hidden">
+        <div class="card-header">
+          <div class="card-icon">04</div>
+          <h2>Interactive quiz</h2>
+          <span id="quizProgressBadge" class="badge">3 questions</span>
+        </div>
+
+        <div class="quiz-top-actions">
+          <button id="newQuizBtn" class="secondary-btn" type="button">↻ New quiz</button>
+        </div>
+
+        <div id="quizContainer"></div>
+
+        <div class="actions-row">
+          <button id="checkAnswersBtn" type="button" class="primary-btn">
+            <span class="btn-text">Check answers</span>
+            <span class="btn-icon">✓</span>
+          </button>
+          <button id="retryQuizBtn" class="ghost-btn" type="button">Retry</button>
+        </div>
+
+        <div id="quizResult" class="quiz-result hidden"></div>
+        <div id="reviewBlock" class="review-block hidden"></div>
+      </section>
+
+      <!-- Flashcards Card -->
+      <section id="flashcardsSection" class="card card-flashcards hidden">
+        <div class="card-header">
+          <div class="card-icon">05</div>
+          <h2>Flashcards</h2>
+        </div>
+        <div id="flashcardsContainer" class="flashcards-grid"></div>
+      </section>
+
+      <!-- History Card -->
+      <section class="card card-history">
+        <div class="card-header">
+          <div class="card-icon">06</div>
+          <h2>History</h2>
+          <button id="refreshHistoryBtn" class="icon-btn" type="button" title="Refresh">↻</button>
+        </div>
+        <div id="historyContainer" class="history-list empty-state">
+          <div class="empty-icon">○</div>
+          <p>No history yet.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
