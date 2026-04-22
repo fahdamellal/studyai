@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyAI — Transformateur de Cours</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 StudyAI</h1>
+    <p class="subtitle">Transforme ton cours en résumé + quiz en 5 secondes</p>
+
+
+    <!-- ZONE INPUT -->
+    <div class="card">
+      <label for="courseText">📋 Colle ton cours ici :</label>
+      <textarea id="courseText" rows="10"
+        placeholder="Colle ici ton texte de cours..."></textarea>
+      <button id="analyzeBtn" onclick="analyzeText()">
+        ✨ Analyser avec l'IA
+      </button>
+      <!-- BONUS : upload fichier -->
+      <input type="file" id="fileInput" accept=".txt,.pdf"
+             onchange="handleFile(event)" />
+    </div>
+
+
+    <!-- ZONE RÉSUMÉ -->
+    <div class="card" id="summarySection" style="display:none">
+      <h2>📌 Les 3 idées clés</h2>
+      <ul id="summaryList"></ul>
+    </div>
+
+
+    <!-- ZONE QUIZ -->
+    <div class="card" id="quizSection" style="display:none">
+      <h2>❓ Quiz — Teste tes connaissances</h2>
+      <div id="quizContainer"></div>
+      <button onclick="checkAnswers()">✅ Valider mes réponses</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
