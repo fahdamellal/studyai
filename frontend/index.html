@@ -3,43 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StudyAI — Transformateur de Cours</title>
+  <title>StudyAI — Transformateur de Cours Intelligent</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>🧠 StudyAI</h1>
-    <p class="subtitle">Transforme ton cours en résumé + quiz en 5 secondes</p>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
 
+  <main class="app-shell">
+    <section class="hero">
+      <div class="hero-badge">🧠 StudyAI</div>
+      <h1>Transforme n’importe quel cours en <span>résumé intelligent</span> + <span>quiz interactif</span></h1>
+      <p class="hero-text">
+        Colle ton texte, lance l’analyse, et obtiens en quelques secondes les 3 idées clés et un mini quiz.
+      </p>
+    </section>
 
-    <!-- ZONE INPUT -->
-    <div class="card">
-      <label for="courseText">📋 Colle ton cours ici :</label>
-      <textarea id="courseText" rows="10"
-        placeholder="Colle ici ton texte de cours..."></textarea>
-      <button id="analyzeBtn" onclick="analyzeText()">
-        ✨ Analyser avec l'IA
-      </button>
-      <!-- BONUS : upload fichier -->
-      <input type="file" id="fileInput" accept=".txt,.pdf"
-             onchange="handleFile(event)" />
-    </div>
+    <section class="workspace">
+      <div class="panel glass">
+        <div class="panel-header">
+          <div>
+            <p class="mini-title">Entrée</p>
+            <h2>Analyse ton cours</h2>
+          </div>
+          <div class="status-chip" id="statusChip">Prêt</div>
+        </div>
 
+        <label for="courseText" class="input-label">📋 Colle ton cours ici</label>
+        <textarea
+          id="courseText"
+          rows="12"
+          placeholder="Exemple : La photosynthèse est le processus par lequel les plantes convertissent l’énergie lumineuse en énergie chimique..."
+        ></textarea>
 
-    <!-- ZONE RÉSUMÉ -->
-    <div class="card" id="summarySection" style="display:none">
-      <h2>📌 Les 3 idées clés</h2>
-      <ul id="summaryList"></ul>
-    </div>
+        <div class="actions">
+          <button id="analyzeBtn" class="primary-btn" onclick="analyzeText()">
+            ✨ Analyser avec l’IA
+          </button>
 
+          <label for="fileInput" class="upload-btn">
+            📁 Charger un fichier
+          </label>
+          <input type="file" id="fileInput" accept=".txt,.pdf" onchange="handleFile(event)" />
+        </div>
 
-    <!-- ZONE QUIZ -->
-    <div class="card" id="quizSection" style="display:none">
-      <h2>❓ Quiz — Teste tes connaissances</h2>
-      <div id="quizContainer"></div>
-      <button onclick="checkAnswers()">✅ Valider mes réponses</button>
-    </div>
-  </div>
+        <div class="loading-box" id="loadingBox" style="display: none;">
+          <div class="spinner"></div>
+          <span>Analyse en cours...</span>
+        </div>
+      </div>
+
+      <div class="results-column">
+        <section class="panel glass summary-panel" id="summarySection" style="display: none;">
+          <div class="panel-header">
+            <div>
+              <p class="mini-title">Résumé</p>
+              <h2>📌 Les 3 idées clés</h2>
+            </div>
+          </div>
+          <ul id="summaryList" class="summary-list"></ul>
+        </section>
+
+        <section class="panel glass quiz-panel" id="quizSection" style="display: none;">
+          <div class="panel-header">
+            <div>
+              <p class="mini-title">Quiz</p>
+              <h2>❓ Teste tes connaissances</h2>
+            </div>
+          </div>
+
+          <div id="quizContainer" class="quiz-container"></div>
+
+          <button class="validate-btn" onclick="checkAnswers()">✅ Valider mes réponses</button>
+        </section>
+      </div>
+    </section>
+  </main>
+
   <script src="script.js"></script>
 </body>
 </html>
